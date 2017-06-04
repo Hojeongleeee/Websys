@@ -24,7 +24,7 @@
 	</nav>
 	
 	<section id="sub_section">
-		<h3>회원정보수정 페이지입니다.</h3>
+		<h1>회원정보수정 페이지입니다.</h1>
 	</section>
 
 	<div class="clear"></div>

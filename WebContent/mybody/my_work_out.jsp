@@ -28,7 +28,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js" ></script>
 <style type="text/css">
 div .video_name {
-	margin-top: 10px; padding-left:20px; padding-top: 10px; height: 30px; color:white; background-color: gray; width: 540px;
+	margin-top: 10px; padding-left:20px; font-size:20px; font-size-adjust:inherit; padding-top:10px; padding-bottom:3px; height: 30px; color:white; background-color: gray; width: 540px;
 }
 div .video_body {
 	width: 560px; background-color: lightgray;
@@ -53,7 +53,7 @@ div .video_body {
 		</ul>
 	</nav>
 	<section id="sub_section">
-		<h3>나의 WORK_OUT</h3>
+		<h1>나의 WORK_OUT</h1>
 	<div class="whole_container">
 <% 		
 	Vector<TestDoneBean> rmlist = new Vector<TestDoneBean>();

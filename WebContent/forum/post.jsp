@@ -3,7 +3,7 @@
 <%@ page import="conn.*, bean.*, java.sql.*, java.util.*" %>
 <html>
 <head>
-<title>JSPBoard</title>
+<title>자유롭게 글을 작성하세요!</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
 </head>
 <body>

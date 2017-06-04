@@ -46,7 +46,7 @@
 	  
 	totalBlock =(int)Math.ceil((double)totalPage / pagePerBlock);  //전체블럭계산
 %>
-<title>JSPBoard</title>
+<title>자유롭게 글을 작성하세요!</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	function list() {
@@ -105,7 +105,7 @@
 	<div class="board" style="width:90%">
 	<!-- list -->
 	<br/>
-	<h2>JSPBoard</h2>
+	<h2>자유롭게 글을 작성하세요!</h2>
 	<br/>
 	<table align="center" border="0" width="80%">
 			<tr>

@@ -11,7 +11,7 @@
 	  String name = bean.getName(); 
 	  String content = bean.getContent(); 
 %>
-<title>JSPBoard</title>
+<title>자유롭게 글을 작성하세요!</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
 <script>
 	function check() {

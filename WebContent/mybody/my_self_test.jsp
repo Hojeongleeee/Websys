@@ -45,7 +45,7 @@
 	</nav>
 	
 	<section id="sub_section">
-		<h3>나의 SELF-TEST</h3>
+		<h1>나의 SELF-TEST</h1>
 		
 		<table class="table" name="mytest">
 		<tr>

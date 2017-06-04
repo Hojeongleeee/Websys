@@ -21,7 +21,7 @@
 	  int count = bean.getCount();
 	  session.setAttribute("bean", bean);//게시물을 세션에 저장
 %>
-<title>JSPBoard</title>
+<title>자유롭게 글을 작성하세요!</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	function list(){
