@@ -1,54 +1,11 @@
 package bean;
 
 public class BoardBean {
-	public int getItem_no() {
-		return item_no;
-	}
-	public void setItem_no(int item_no) {
-		this.item_no = item_no;
-	}
-	public int getMem_no() {
-		return mem_no;
-	}
-	public void setMem_no(int mem_no) {
-		this.mem_no = mem_no;
-	}
-	public String getTimestamp() {
-		return timestamp;
-	}
-	public void setTimestamp(String timestamp) {
-		this.timestamp = timestamp;
-	}
 	public int getCount() {
 		return count;
 	}
 	public void setCount(int count) {
 		this.count = count;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getContents() {
-		return contents;
-	}
-	public void setContents(String contents) {
-		this.contents = contents;
-	}
-	int item_no;
-	int mem_no;
-	String timestamp;
-	int count;
-	String title;
-	String contents;
-	private int num;
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
 	}
 	public String getName() {
 		return name;
@@ -116,6 +73,12 @@ public class BoardBean {
 	public void setFilesize(int filesize) {
 		this.filesize = filesize;
 	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	private String name;        
 	private String subject;    
 	private String content;     
@@ -125,8 +88,9 @@ public class BoardBean {
 	private String regdate;     
 	private String pass;          
 	private String  ip;
-//	private int count;        
+	private int count;        
 	private String filename; 
 	private int filesize;
+	private int num;
 	
 }

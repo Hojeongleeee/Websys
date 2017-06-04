@@ -1,6 +1,4 @@
 <%@ page contentType="text/html; charset=utf-8"%>
-<html>
-<head>
 <%@page import="bean.BoardBean"%>
 <jsp:useBean id="bMgr" class="conn.BoardMgr" />
 <%
@@ -14,7 +12,7 @@
 		String dbPass = bean.getPass();
 		if (inPass.equals(dbPass)) {
 			bMgr.deleteBoard(num);
-			String url = "list.jsp?nowPage=" + nowPage;
+			String url = "forum.jsp?nowPage=" + nowPage;
 			response.sendRedirect(url);
 		} else {
 %>
@@ -22,11 +20,11 @@
 	alert("입력하신 비밀번호가 아닙니다.");
 	history.back();
 </script>
-<%}
+<%  	}
 	} else {
 %>
 <title>JSP Board</title>
-<link href="style.css" rel="stylesheet" type="text/css">
+<link href="../style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	function check() {
 		if (document.delFrm.pass.value == "") {
@@ -38,9 +36,26 @@
 	}
 </script>
 </head>
-<body bgcolor="#FFFFCC">
-	<div align="center">
-		<br/><br/>
+<body>
+<div id="wrap">
+	<header id="sub_header">
+		<div id="logo">
+			<img id="#" src="../img/img_.png" width="140" height="120">	
+		</div>
+		<%@ include file="../base/top.jsp" %>
+	</header>
+	<div class="clear"></div>
+	
+	<nav id="sub_menu">
+		<ul>		
+			<li><a href="park.jsp">자유게시판</a></li>
+		</ul>
+	</nav>
+	
+	<section id="sub_section">
+		<h1>자유게시판</h1>
+		
+				<br/><br/>
 		<table width="50%" cellspacing="0" cellpadding="3">
 			<tr>
 				<td bgcolor=#dddddd height="21" align="center">
@@ -75,7 +90,13 @@
 			<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
 			<input type="hidden" name="num" value="<%=num%>">
 		</form>
-	</div>
-	<%}%>
+	</section>
+	<% } %>
+	<div class="clear"></div>
+	
+	<footer>
+		<%@ include file="../base/foot.jsp" %>
+	</footer>
+</div>
 </body>
 </html>

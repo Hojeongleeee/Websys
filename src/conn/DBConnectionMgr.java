@@ -36,7 +36,7 @@ import java.util.Vector;
 public class DBConnectionMgr {
     private Vector connections = new Vector(10);
     private String _driver = "org.gjt.mm.mysql.Driver",
-    _url = "jdbc:mysql://127.0.0.1:3306/websys9?useUnicode=true&characterEncoding=EUC-KR",
+    _url = "jdbc:mysql://127.0.0.1:3306/websys9?useUnicode=true&characterEncoding=utf-8",
     _user = "root",
     _password = "websys";
     private boolean _traceOn = false;

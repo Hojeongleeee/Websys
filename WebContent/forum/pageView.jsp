@@ -1,3 +1,4 @@
+<% String Path = request.getContextPath();%>
 <%@ page contentType="text/html; charset=utf-8"%>
 <html>
 <head>
@@ -28,7 +29,7 @@
 	  totalBlock =(int)Math.ceil((double)totalPage / pagePerBlock);//전체블럭계산
 %>
 <title>페이징 & 블록 처리 테스트</title>
-<link href="style.css" rel="stylesheet" type="text/css">
+<link href="../style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	function pageing(page) {
 		document.readFrm.nowPage.value = page;
@@ -41,75 +42,97 @@
 	} 
 </script>
 </head>
-<body bgcolor="#FFFFCC">
-<div align="center">
-<br/>
-<h2>페이징 & 블록 처리 테스트</h2>
-<br/>
-	<table align="center" border="0" width="80%">
-			<tr align="center">
-				<td>Total : <%=totalRecord%>Articles(<font color="red">
-				<%=nowPage%>/<%=totalPage%>Pages</font>)</td>
-			</tr>
-	</table>
-	<table>
-	<tr>
-		<td>게시물 번호 : &nbsp;</td>
-		<%
-			listSize = totalRecord-start;
-			for(int i = 0;i<numPerPage; i++){
-				if (i == listSize) break;
-		%>
-		<td align="center">
-			<%=totalRecord-((nowPage-1)*numPerPage)-i%>&nbsp;
-		</td>
-		<%}//for%>
-		<td align="center">&nbsp;</td>
-	</tr>
-</table>
-<!-- 페이징 및 블럭 -->
-<table>
-	<tr>
-		<td>
-			<!-- 페이징 및 블럭 처리 Start--> 
-			<%
-   				  int pageStart = (nowBlock -1)*pagePerBlock + 1 ; //하단 페이지 시작번호
-   				  int pageEnd = ((pageStart + pagePerBlock ) < totalPage) ?  (pageStart + pagePerBlock): totalPage+1; 
-   				  //하단 페이지 끝번호
-   				  if(totalPage !=0){
-    			  	if (nowBlock > 1) {%>
-    			  		<a href="javascript:block('<%=nowBlock-1%>')">prev...</a><%}%>&nbsp; 
-    			  			
-							<%for ( ; pageStart < pageEnd; pageStart++){%>
-     			     			<a href="javascript:pageing('<%=pageStart %>')"> 
-     						<%if(pageStart==nowPage) {%><font color="blue"> <%}%>
-     						[<%=pageStart %>] 
-     						<%if(pageStart==nowPage) {%></font> <%}%></a> 
-    						<%}//for%>&nbsp; 
-    					
-    					<%if (totalBlock > nowBlock ) {%>
-    					<a href="javascript:block('<%=nowBlock+1%>')">.....next</a>
-    				<%}%>&nbsp;  
-   				<%}%>
- 			<!-- 페이징 및 블럭 처리 End-->
-		</td>
-	</tr>
-</table>
-<hr width="45%"/>
-<form name="readFrm">
-	<input type="hidden" name="totalRecord" value="<%=totalRecord%>">
-	<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
-</form>
-<b>
-totalRecord : <%=totalRecord%>&nbsp;
-numPerPage : <%=numPerPage%>&nbsp;
-pagePerBlock : <%=pagePerBlock%>&nbsp;
-totalPage : <%=totalPage%>&nbsp;<br>
-totalBlock : <%=totalBlock%>&nbsp;
-nowPage : <%=nowPage%>&nbsp;
-nowBlock : <%=nowBlock%>&nbsp;</b>
-<p/>
-<input type="button" value="TotalRecord 입력폼" onClick="javascript:location.href='pageView.html'">
+<body>
+<div id="wrap">
+	<header id="sub_header">
+		<div id="logo">
+			<img id="#" src="../img/img_park.png" width="140" height="120">	
+		</div>
+		<%@ include file="../base/top.jsp" %>
+	</header>
+	<div class="clear"></div>
+	
+	<nav style="width:10%"></nav>
+	<section id="sub_section" style="width:90%;">
+		<h1>자유게시판</h1>
+			<div align="center">
+				<br/>
+				<h2>페이징 & 블록 처리 테스트</h2>
+				<br/>
+					<table align="center" border="0" width="80%">
+							<tr align="center">
+								<td>Total : <%=totalRecord%>Articles(<font color="red">
+								<%=nowPage%>/<%=totalPage%>Pages</font>)</td>
+							</tr>
+					</table>
+					<table>
+					<tr>
+						<td>게시물 번호 : &nbsp;</td>
+						<%
+							listSize = totalRecord-start;
+							for(int i = 0;i<numPerPage; i++){
+								if (i == listSize) break;
+						%>
+						<td align="center">
+							<%=totalRecord-((nowPage-1)*numPerPage)-i%>&nbsp;
+						</td>
+						<%}//for%>
+						<td align="center">&nbsp;</td>
+					</tr>
+				</table>
+				<!-- 페이징 및 블럭 -->
+				<table>
+					<tr>
+						<td>
+							<!-- 페이징 및 블럭 처리 Start--> 
+							<%
+				   				  int pageStart = (nowBlock -1)*pagePerBlock + 1 ; //하단 페이지 시작번호
+				   				  int pageEnd = ((pageStart + pagePerBlock ) < totalPage) ?  (pageStart + pagePerBlock): totalPage+1; 
+				   				  //하단 페이지 끝번호
+				   				  if(totalPage !=0){
+				    			  	if (nowBlock > 1) {%>
+				    			  		<a href="javascript:block('<%=nowBlock-1%>')">prev...</a><%}%>&nbsp; 
+				    			  			
+											<%for ( ; pageStart < pageEnd; pageStart++){%>
+				     			     			<a href="javascript:pageing('<%=pageStart %>')"> 
+				     						<%if(pageStart==nowPage) {%><font color="blue"> <%}%>
+				     						[<%=pageStart %>] 
+				     						<%if(pageStart==nowPage) {%></font> <%}%></a> 
+				    						<%}//for%>&nbsp; 
+				    					
+				    					<%if (totalBlock > nowBlock ) {%>
+				    					<a href="javascript:block('<%=nowBlock+1%>')">.....next</a>
+				    				<%}%>&nbsp;  
+				   				<%}%>
+				 			<!-- 페이징 및 블럭 처리 End-->
+						</td>
+					</tr>
+				</table>
+				<hr width="45%"/>
+				<form name="readFrm">
+					<input type="hidden" name="totalRecord" value="<%=totalRecord%>">
+					<input type="hidden" name="nowPage" value="<%=nowPage%>"> 
+				</form>
+				<b>
+				totalRecord : <%=totalRecord%>&nbsp;
+				numPerPage : <%=numPerPage%>&nbsp;
+				pagePerBlock : <%=pagePerBlock%>&nbsp;
+				totalPage : <%=totalPage%>&nbsp;<br>
+				totalBlock : <%=totalBlock%>&nbsp;
+				nowPage : <%=nowPage%>&nbsp;
+				nowBlock : <%=nowBlock%>&nbsp;</b>
+				<p/>
+				<input type="button" value="TotalRecord 입력폼" onClick="javascript:location.href='pageView.html'">
+			</div>
+
+
+	</section>
+
+	<div class="clear"></div>
+	
+	<footer>
+		<%@ include file="../base/foot.jsp" %>
+	</footer>
 </div>
 </body>
 </html>

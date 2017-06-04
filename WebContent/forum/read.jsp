@@ -22,10 +22,10 @@
 	  session.setAttribute("bean", bean);//게시물을 세션에 저장
 %>
 <title>JSPBoard</title>
-<link href="style.css" rel="stylesheet" type="text/css">
+<link href="../style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	function list(){
-	 	document.listFrm.action="list.jsp";
+	 	document.listFrm.action="forum.jsp";
 	    document.listFrm.submit();
 	 } 
 	
@@ -35,67 +35,89 @@
 	}
 </script>
 </head>
-<body bgcolor="#FFFFCC">
-<br/><br/>
-<table align="center" width="70%" border=0 cellspacing="3" cellpadding="0">
- <tr>
-  <td bgcolor="#9CA2EE" height="25" align="center">글읽기</td>
- </tr>
- <tr>
-  <td colspan="2">
-   <table border="0" cellpadding="3" cellspacing="0" width=100%> 
-    <tr> 
-  <td align="center" bgcolor="#DDDDDD" width="10%"> 이 름 </td>
-  <td bgcolor="#FFFFE8"><%=name%></td>
-  <td align="center" bgcolor="#DDDDDD" width=10%> 등록날짜 </td>
-  <td bgcolor="#FFFFE8"><%=regdate%></td>
- </tr>
- <tr> 
-    <td align="center" bgcolor="#DDDDDD"> 제 목</td>
-    <td bgcolor="#FFFFE8" colspan="3"><%=subject%></td>
-   </tr>
-   <tr> 
-     <td align="center" bgcolor="#DDDDDD">첨부파일</td>
-     <td bgcolor="#FFFFE8" colspan="3">
-     <% if( filename !=null && !filename.equals("")) {%>
-  		<a href="javascript:down('<%=filename%>')"><%=filename%></a>
-  		 &nbsp;&nbsp;<font color="blue">(<%=filesize%>KBytes)</font>  
-  		 <%} else{%> 등록된 파일이 없습니다.<%}%>
-     </td>
-   </tr>
-   <tr> 
-    <td colspan="4"><br/><pre><%=content%></pre><br/></td>
-   </tr>
-   <tr>
-    <td colspan="4" align="right">
-     <%=ip%>로 부터 글을 남기셨습니다./  조회수  <%=count%>
-    </td>
-   </tr>
-   </table>
-  </td>
- </tr>
- <tr>
-  <td align="center" colspan="2"> 
- <hr/>
- [ <a href="javascript:list()" >리스트</a> | 
- <a href="update.jsp?nowPage=<%=nowPage%>&num=<%=num%>" >수 정</a> |
- <a href="reply.jsp?nowPage=<%=nowPage%>" >답 변</a> |
- <a href="delete.jsp?nowPage=<%=nowPage%>&num=<%=num%>">삭 제</a> ]<br>
-  </td>
- </tr>
-</table>
+<body>
+<div id="wrap">
+	<header id="sub_header">
+		<div id="logo">
+			<img id="#" src="../img/img_park.png" width="140" height="120">	
+		</div>
+		<%@ include file="../base/top.jsp" %>
+	</header>
+	<div class="clear"></div>
+	
+	<nav style="width:10%"></nav>
+	<section id="sub_section" style="width:90%;">
+		<h1>자유게시판</h1>
+	<div class="board" style="width:90%">
+		<table align="center" width="70%" border=0 cellspacing="3" cellpadding="0">
+		 <tr>
+		  <td bgcolor="#9CA2EE" height="25" align="center">글읽기</td>
+		 </tr>
+		 <tr>
+		  <td colspan="2">
+		   <table border="0" cellpadding="3" cellspacing="0" width=100%> 
+		    <tr> 
+		  <td align="center" bgcolor="#DDDDDD" width="10%"> 이 름 </td>
+		  <td bgcolor="#FFFFE8"><%=name%></td>
+		  <td align="center" bgcolor="#DDDDDD" width=10%> 등록날짜 </td>
+		  <td bgcolor="#FFFFE8"><%=regdate%></td>
+		 </tr>
+		 <tr> 
+		    <td align="center" bgcolor="#DDDDDD"> 제 목</td>
+		    <td bgcolor="#FFFFE8" colspan="3"><%=subject%></td>
+		   </tr>
+		   <tr> 
+		     <td align="center" bgcolor="#DDDDDD">첨부파일</td>
+		     <td bgcolor="#FFFFE8" colspan="3">
+		     <% if( filename !=null && !filename.equals("")) {%>
+		  		<a href="javascript:down('<%=filename%>')"><%=filename%></a>
+		  		 &nbsp;&nbsp;<font color="blue">(<%=filesize%>KBytes)</font>  
+		  		 <%} else{%> 등록된 파일이 없습니다.<%}%>
+		     </td>
+		   </tr>
+		   <tr> 
+		    <td colspan="4"><br/><pre><%=content%></pre><br/></td>
+		   </tr>
+		   <tr>
+		    <td colspan="4" align="right">
+		     <%=ip%>로 부터 글을 남기셨습니다./  조회수  <%=count%>
+		    </td>
+		   </tr>
+		   </table>
+		  </td>
+		 </tr>
+		 <tr>
+		  <td align="center" colspan="2"> 
+		 <hr/>
+		 [ <a href="javascript:list()" >리스트</a> | 
+		 <a href="update.jsp?nowPage=<%=nowPage%>&num=<%=num%>" >수 정</a> |
+		 <a href="reply.jsp?nowPage=<%=nowPage%>" >답 변</a> |
+		 <a href="delete.jsp?nowPage=<%=nowPage%>&num=<%=num%>">삭 제</a> ]<br>
+		  </td>
+		 </tr>
+		</table>
+		
+		<form name="downFrm" action="download.jsp" method="post">
+			<input type="hidden" name="filename">
+		</form>
+		
+		<form name="listFrm" method="post">
+			<input type="hidden" name="num" value="<%=num%>">
+			<input type="hidden" name="nowPage" value="<%=nowPage%>">
+			<%if(!(keyWord==null || keyWord.equals("null"))){ %>
+			<input type="hidden" name="keyField" value="<%=keyField%>">
+			<input type="hidden" name="keyWord" value="<%=keyWord%>">
+			<%}%>
+		</form>
+		</div>
+	</section>
 
-<form name="downFrm" action="download.jsp" method="post">
-	<input type="hidden" name="filename">
-</form>
-
-<form name="listFrm" method="post">
-	<input type="hidden" name="num" value="<%=num%>">
-	<input type="hidden" name="nowPage" value="<%=nowPage%>">
-	<%if(!(keyWord==null || keyWord.equals("null"))){ %>
-	<input type="hidden" name="keyField" value="<%=keyField%>">
-	<input type="hidden" name="keyWord" value="<%=keyWord%>">
-	<%}%>
-</form>
+	<div class="clear"></div>
+	
+	<footer>
+		<%@ include file="../base/foot.jsp" %>
+	</footer>
+	
+</div>
 </body>
 </html>

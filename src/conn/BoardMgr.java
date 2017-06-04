@@ -23,7 +23,7 @@ public class BoardMgr {
 
 	private DBConnectionMgr pool;
 	private static final String  SAVEFOLDER = "C:/Jsp/myapp/WebContent/ch14/fileupload";
-	private static final String ENCTYPE = "euc-kr";
+	private static final String ENCTYPE = "utf-8"; //¼öÁ¤
 	private static int MAXSIZE = 5*1024*1024;
 
 	public BoardMgr() {
@@ -45,12 +45,12 @@ public class BoardMgr {
 		try {
 			con = pool.getConnection();
 			if (keyWord.equals("null") || keyWord.equals("")) {
-				sql = "select * from tblBoard order by ref desc, pos limit ?, ?";
+				sql = "select * from board order by ref desc, pos limit ?, ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, start);
 				pstmt.setInt(2, end);
 			} else {
-				sql = "select * from  tblBoard where " + keyField + " like ? ";
+				sql = "select * from  board where " + keyField + " like ? ";
 				sql += "order by ref desc, pos limit ? , ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%" + keyWord + "%");
@@ -88,10 +88,10 @@ public class BoardMgr {
 		try {
 			con = pool.getConnection();
 			if (keyWord.equals("null") || keyWord.equals("")) {
-				sql = "select count(num) from tblBoard";
+				sql = "select count(num) from board";
 				pstmt = con.prepareStatement(sql);
 			} else {
-				sql = "select count(num) from  tblBoard where " + keyField + " like ? ";
+				sql = "select count(num) from board where " + keyField + " like ? ";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%" + keyWord + "%");
 			}
@@ -118,7 +118,7 @@ public class BoardMgr {
 		String filename = null;
 		try {
 			con = pool.getConnection();
-			sql = "select max(num)  from tblBoard";
+			sql = "select max(num)  from board";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			int ref = 1;
@@ -138,7 +138,7 @@ public class BoardMgr {
 			if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
 				content = UtilMgr.replace(content, "<", "&lt;");
 			}
-			sql = "insert tblBoard(name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize)";
+			sql = "insert board(name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize)";
 			sql += "values(?, ?, ?, ?, 0, 0, now(), ?, 0, ?, ?, ?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, multi.getParameter("name"));
@@ -166,7 +166,7 @@ public class BoardMgr {
 		BoardBean bean = new BoardBean();
 		try {
 			con = pool.getConnection();
-			sql = "select * from tblBoard where num=?";
+			sql = "select * from board where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
@@ -200,7 +200,7 @@ public class BoardMgr {
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "update tblBoard set count=count+1 where num=?";
+			sql = "update board set count=count+1 where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
@@ -219,7 +219,7 @@ public class BoardMgr {
 		ResultSet rs = null;
 		try {
 			con = pool.getConnection();
-			sql = "select filename from tblBoard where num=?";
+			sql = "select filename from board where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
@@ -231,7 +231,7 @@ public class BoardMgr {
 				}
 			}
 
-			sql = "delete from tblBoard where num=?";
+			sql = "delete from board where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
@@ -249,7 +249,7 @@ public class BoardMgr {
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "update tblBoard set name=?,subject=?,content=? where num=?";
+			sql = "update board set name=?,subject=?,content=? where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getName());
 			pstmt.setString(2, bean.getSubject());
@@ -271,7 +271,7 @@ public class BoardMgr {
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "insert tblBoard (name,content,subject,ref,pos,depth,regdate,pass,count,ip)";
+			sql = "insert board (name,content,subject,ref,pos,depth,regdate,pass,count,ip)";
 			sql += "values(?,?,?,?,?,?,now(),?,0,?)";
 			int depth = bean.getDepth() + 1;
 			int pos = bean.getPos() + 1;
@@ -300,7 +300,7 @@ public class BoardMgr {
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "update tblBoard set pos = pos + 1 where ref=? and pos > ?";
+			sql = "update board set pos = pos + 1 where ref=? and pos > ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, ref);
 			pstmt.setInt(2, pos);
@@ -361,7 +361,7 @@ public class BoardMgr {
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "insert tblBoard(name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize)";
+			sql = "insert board(name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize)";
 			sql+="values('aaa', 'bbb', 'ccc', 0, 0, 0, now(), '1111',0, '127.0.0.1', null, 0);";
 			pstmt = con.prepareStatement(sql);
 			for (int i = 0; i < 1000; i++) {
